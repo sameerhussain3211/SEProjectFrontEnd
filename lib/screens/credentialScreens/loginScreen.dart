@@ -1,6 +1,6 @@
-import 'package:app7/homescreen1.dart';
 import 'package:app7/screens/credentialScreens/resetPassword.dart';
 import 'package:app7/screens/credentialScreens/signUp.dart';
+import 'package:app7/screens/userScreens/userHomeScreen.dart';
 import 'package:app7/widgets/CustomDropDown.dart';
 import 'package:app7/widgets/SubmitButton.dart';
 import 'package:app7/widgets/textInput.dart';
@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(80, 208, 52, 41),
+         automaticallyImplyLeading: false,
       
         
         title: Center(child: Text("BidNest")),
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         String c = password.text.toString();
                         String d= dropdownvalue.toString();
                     print("email $b password $c your are $d");
-                    Navigator.push(context, MaterialPageRoute(builder: (context){return homescreen1();
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return userHomeScreen();
                     }   ));
                    
                    },

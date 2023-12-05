@@ -12,10 +12,8 @@ class signUp extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(80, 208, 52, 41),
-
-        
+        automaticallyImplyLeading: false,
         title: Center(child: Text("BidNest")),
-        
       ),
       // int this lab i did list view , circling image , custom font
       body:

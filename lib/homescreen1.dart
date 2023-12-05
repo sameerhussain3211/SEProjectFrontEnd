@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class homescreen1 extends StatelessWidget{
+  Image? img=Image.asset('assects/images/sunflower.jpg');
   @override
   Widget build(BuildContext context) {
     
@@ -10,7 +11,13 @@ class homescreen1 extends StatelessWidget{
         title: Center(child: Text("BidNest")),
         
       ),
-      body: Container(color: Colors.amber),
+      body: 
+        Container(
+          height: 200,
+          child: img
+          
+      ),
+    
     );
   }
 

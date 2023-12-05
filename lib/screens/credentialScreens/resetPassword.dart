@@ -14,8 +14,7 @@ class resetpassword extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(80, 208, 52, 41),
-
-        
+        automaticallyImplyLeading: false,
         title: Center(child: Text("BidNest")),
         
       ),
