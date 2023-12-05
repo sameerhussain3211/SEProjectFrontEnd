@@ -1,11 +1,14 @@
 import 'package:app7/screens/credentialScreens/loginScreen.dart';
+import 'package:app7/widgets/textInput.dart';
 import 'package:flutter/material.dart';
+import 'package:app7/widgets/SubmitButton.dart';
 
 class resetpassword extends StatelessWidget{
 
   var PIN=TextEditingController();
    var NewPasssword=TextEditingController();
   var password=TextEditingController();
+  var EMAIL=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,121 +38,62 @@ class resetpassword extends StatelessWidget{
                     fontWeight: FontWeight.bold
                   ),),
 
+                  Container(height: 10,),
+                  Text("ENTER EMAIL"),
 
-                  Container(height: 20,),
-                  Text("PIN CODE"),
-            
-                  
-                    TextField(
-                      controller: PIN,
-                      decoration: InputDecoration(
-                        hintText: "Enter PIN",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                           
-                            width: 2
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(251, 97, 233, 101),
-                            width: 2
-                          )
-                        )
-                      ),
-                    ),
-            
-          
-                  Container(height: 20,),
-                  Text("NEW PASSWORD"),
-            
-                  
-                    TextField(
-                      controller: NewPasssword,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: "NEW PASSWORD",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                           
-                            width: 2
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(251, 97, 233, 101),
-                            width: 2
-                          )
-                        )
-                      ),
-                    ),
-            
-            
-                  Container(height: 20,),
-                  Text("CONFIRM PASSWORD"),
-                  
-                  TextField(
-                    // keyboardType: TextInputType.number, can change key bord from here
-                    controller: password,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: "CONFIRM PASSWORD ",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2
-                          ),
-                          ),
-                          // enabledBorder: OutlineInputBorder(
-                          // borderRadius: BorderRadius.circular(20),
-                          // borderSide: BorderSide(
-                          //   color: Colors.blue,
-                          //   width: 2
-                          // ),
-                          // ),
-                        
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(251, 97, 233, 101),
-                            width: 2
-                          )
-                        )
-                      ),
+                  textInput(controller: EMAIL, 
+                  hintText: "EMAIL",
+                   borderRadius: 10, 
+                  obscure: false),
+                  SubmitButton(buttonText: "SUBMIT", buttonLength: 50,
+                  onPressedCallback: (){
+                    String a = EMAIL.text.toString();
+                    print("$a");
+                  },
                   ),
-Container(
-                    margin: EdgeInsets.all(15),
-                    child: ElevatedButton(
-                      
-                       style: ElevatedButton.styleFrom(
-                       primary: Colors.green,
-                        onPrimary: Colors.white,
-                         shadowColor: Colors.greenAccent,
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(32.0)),
-                         minimumSize: Size(150, 50), //////// HERE
-            ),
-                    
-                      onPressed:(){ 
+
+
+                  Container(height: 10,),
+                  Text("PIN CODE"),
+
+                  textInput(controller: PIN, 
+                  hintText: "PIN",
+                   borderRadius: 10, 
+                  obscure: false),
+
+            
+                  Container(height: 10,),
+                  Text("NEW PASSWORD"),
+                  textInput(controller: NewPasssword, 
+                  hintText: "NEW PASSWORD",
+                   borderRadius: 10, 
+                  obscure: true),
+
+            
+                  Container(height: 10,),
+                  Text("CONFIRM PASSWORD"),
+
+                                   
+                  textInput(controller: password, 
+                  hintText: "CONFIRM PASSWORD",
+                   borderRadius: 10, 
+                  obscure: true),
+
+                 Container(
+                  margin: EdgeInsets.all(10),
+                   child: SubmitButton(buttonText: "RESET PASSWORD", buttonLength: 150,
+                   onPressedCallback: (){
                         String a = PIN.text.toString();
                         String b= NewPasssword.text.toString();
                          String c = password.text.toString();
-                          Navigator.push(context, MaterialPageRoute(builder: (context){return LoginScreen();
-                }
-                )
-                );
-                         print("Your pin $a and your new password is $b and confirem password is $c");},
-                     child: Text("SUBMIT"),
-                    ),
-                  ),
-                 
-                  
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return LoginScreen();
+
+                    }   ));
+                    print("Your pin $a and your new password is $b and confirem password is $c");
+                   },
+                   ),
+                 )
+                    ,
                 ],
               ),
             ),

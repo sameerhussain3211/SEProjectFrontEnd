@@ -1,5 +1,7 @@
 import 'package:app7/screens/credentialScreens/loginScreen.dart';
+import 'package:app7/widgets/textInput.dart';
 import 'package:flutter/material.dart';
+import 'package:app7/widgets/SubmitButton.dart';
 
 class signUp extends StatelessWidget{
 
@@ -38,83 +40,36 @@ class signUp extends StatelessWidget{
                   Container(height: 20,),
                   Text("EMAIL ADDRESS"),
             
-                  
-                    TextField(
-                      controller: email,
-                      decoration: InputDecoration(
-                        hintText: "EMAIL ADDRESS",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                           
-                            width: 2
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(251, 97, 233, 101),
-                            width: 2
-                          )
-                        )
-                      ),
-                    ),
+
+                    textInput(controller: email,
+                     hintText: "EMAIL ADDRESS",
+                      borderRadius: 10, 
+                      obscure: false),
             
           
                   Container(height: 20,),
                   Text("PASSWORD"),
             
-                  
-                    TextField(
-                      controller: passsword,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: "CREATE A PASSWORD",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                           
-                            width: 2
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(251, 97, 233, 101),
-                            width: 2
-                          )
-                        )
-                      ),
-                    ),
-            
-            
-                  
-                 Container(
-                    margin: EdgeInsets.all(15),
-                    child: ElevatedButton(
-                      
-                       style: ElevatedButton.styleFrom(
-                       primary: Colors.green,
-                        onPrimary: Colors.white,
-                         shadowColor: Colors.greenAccent,
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(32.0)),
-                         minimumSize: Size(150, 50), //////// HERE
-            ),
-                    
-                      onPressed:(){ 
+                    textInput(controller: passsword,
+                     hintText: "EMAIL PASSWORD",
+                      borderRadius: 10, 
+                      obscure: true),
+
+            Container(
+                  margin: EdgeInsets.all(15),
+                   child: SubmitButton(buttonText: "SIGN UP", buttonLength: 150,
+                   onPressedCallback: (){
                         String a = email.text.toString();
                         String b= passsword.text.toString();
-                         Navigator.push(context, MaterialPageRoute(builder: (context){return LoginScreen();
-                }
-                )
-                );
-                     
-                         print("Your email $a and your new password is $b ");},
-                     child: Text("SIGN UP"),
-                    ),
-                  ),
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return LoginScreen();
+
+                    }   ));
+                    print("Your pin $a and your new password is $b ");
+                   },
+                   ),
+                 )
+                    ,
                 ],
               ),
             ),
