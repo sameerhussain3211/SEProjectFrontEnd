@@ -1,7 +1,6 @@
 import 'package:app7/screens/credentialScreens/loginScreen.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
 }

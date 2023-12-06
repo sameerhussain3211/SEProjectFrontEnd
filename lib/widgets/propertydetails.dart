@@ -1,29 +1,27 @@
 import 'package:app7/widgets/SubmitButton.dart';
 import 'package:flutter/material.dart';
 
-class propertyDetails extends StatelessWidget{
+class propertyDetails extends StatelessWidget {
   Image? image1;
   Image? image2;
   Image? image3;
   Image? image4;
   Image? image5;
-  String ?regionName;
-  String ?cityName;
-  int ?roomsInHouse;
-  double ?areaOfHouseInMarla;
-  double ?priceOfHouseInMillions;
-  String ?descriptionOfHouse;
+  String? addressOfHouse;
+  int? roomsInHouse;
+  double? areaInSqFeet;
+  double? priceOfHouseInMillions;
+  String? descriptionOfHouse;
 
-    propertyDetails({
+  propertyDetails({
     required this.image1,
     required this.image2,
     required this.image3,
     required this.image4,
     required this.image5,
-    required this.regionName,
-    required this.cityName,
+    required this.addressOfHouse,
     required this.roomsInHouse,
-    required this.areaOfHouseInMarla,
+    required this.areaInSqFeet,
     required this.priceOfHouseInMillions,
     required this.descriptionOfHouse,
   });
@@ -31,91 +29,105 @@ class propertyDetails extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
+      appBar: AppBar(
+          backgroundColor: Color.fromARGB(80, 208, 52, 41),
+          title: Center(child: Text("BidNest")),
+        ),
       body: SingleChildScrollView(
         child: Column(children: [
           Container(
             height: 200,
             child: image1,
-        
           ),
-          Container(height: 5,),
-           Container(
+          Container(
+            height: 5,
+          ),
+          Container(
             height: 200,
             child: image2,
-        
           ),
-          Container(height: 5,),
-           Container(
-           height: 200,
+          Container(
+            height: 5,
+          ),
+          Container(
+            height: 200,
             child: image3,
-        
           ),
-          Container(height: 5,),
-           Container(
+          Container(
+            height: 5,
+          ),
+          Container(
             height: 200,
             child: image4,
-        
           ),
-                    Container(height: 5,),
-           Container(
+          Container(
+            height: 5,
+          ),
+          Container(
             height: 200,
             child: image5,
-        
           ),
-                  Container(height: 10,),
-          Row(
-            children: [
+          Container(
+            height: 10,
+          ),
               Container(
                 color: const Color.fromARGB(118, 158, 158, 158),
-                child: Text("AREA IN MARLA: $areaOfHouseInMarla"),),
-                Container(width: 20,),
-                Container(
-                color: const Color.fromARGB(118, 158, 158, 158),
-                child: Text("CITY: $areaOfHouseInMarla"),),
+                child: Text("ADDRESS: $addressOfHouse"),
+              ),
+          
+          Container(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              
+  
+              Container(
+                color: const Color.fromARGB(104, 158, 158, 158),
+                child: Text("ROOMS: $roomsInHouse"),
+              ),
+              Container(
+                width: 30,
+              ),
+              Container(
+                  color: const Color.fromARGB(104, 158, 158, 158),
+                  child: Text("PRICE IN MILLIONS: $priceOfHouseInMillions")),
             ],
           ),
-        
-            Container(height: 10,),
-        Row(
-          children: [
-            Container(
-              color: const Color.fromARGB(94, 158, 158, 158),
-              child: Text("REGION: $regionName"),
-            ),
-            Container(width: 30,),
-            Container(
-              color: const Color.fromARGB(104, 158, 158, 158),
-              child: Text("ROOMS: $roomsInHouse"),
-            ),
-            Container(width: 30,),
-             Container(color: const Color.fromARGB(104, 158, 158, 158),
-              child: Text("PRICE IN MILLIONS: $priceOfHouseInMillions")),
-          ],
-         
-        
-        ),
-        Container(height: 20,),
-         Container(
-          width: 400,
-          child: Text("$descriptionOfHouse"),
-            
-          ),
-          Container(height: 40,),
+             Container(
+                height: 20,
+              ),
+          Container(
+                color: const Color.fromARGB(118, 158, 158, 158),
+                child: Text("AREA IN SQ FEET: $areaInSqFeet"),
+              ),
+              Container(
+                height: 20,
+              ),
 
-         SubmitButton(buttonText: "BID NOW", buttonLength: 100,
-         onPressedCallback: (){
+              Text("DESCRIPTION: "),
+               Container(
+                height: 20,
+              ),
+
+
+           Container(
+            padding: EdgeInsets.all(20),
+              width: 400,
+              child: Text("$descriptionOfHouse"),
+            ),
           
-
-         },
-         )
-        
-        
+          Container(
+            height: 40,
+          ),
+          SubmitButton(
+            buttonText: "BID NOW",
+            buttonLength: 100,
+            onPressedCallback: () {},
+          )
         ]),
       ),
     );
-
   }
-
 }

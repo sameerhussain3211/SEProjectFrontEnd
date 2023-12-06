@@ -6,12 +6,11 @@ class textInput extends StatelessWidget {
   final double borderRadius;
   final bool obscure;
 
-  const textInput({
-    required this.controller,
-    required this.hintText,
-    required this.borderRadius,
-    required this.obscure
-  });
+  const textInput(
+      {required this.controller,
+      required this.hintText,
+      required this.borderRadius,
+      required this.obscure});
 
   @override
   Widget build(BuildContext context) {
