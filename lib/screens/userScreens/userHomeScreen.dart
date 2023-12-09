@@ -1,8 +1,8 @@
-import 'package:app7/homescreen1.dart';
 import 'package:app7/screens/credentialScreens/loginScreen.dart';
 import 'package:app7/screens/userScreens/createListingScreens/createListing.dart';
 import 'package:app7/screens/userScreens/myBidsScreens/myBidHomepage.dart';
 import 'package:app7/screens/userScreens/searchScreens/search.dart';
+import 'package:app7/screens/userScreens/viewListingsScreens/viewLists.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -118,7 +118,7 @@ class userHomeScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return homescreen1();
+                      return viewList();
                     }));
                   },
                   child: Container(

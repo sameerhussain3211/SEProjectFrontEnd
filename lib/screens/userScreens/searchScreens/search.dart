@@ -54,6 +54,7 @@ class _search extends State<search> {
   double? lowerLimitForBid;
   double? upperLimitForBid;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
