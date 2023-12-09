@@ -1,4 +1,5 @@
 import 'package:app7/homescreen1.dart';
+import 'package:app7/screens/userScreens/myBidsScreens/myBidHomepage.dart';
 import 'package:app7/screens/userScreens/searchScreens/search.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class userHomeScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return homescreen1();
+                          return myBidhomepage();
                         }));
                       },
                       child: Container(
@@ -86,7 +87,7 @@ class userHomeScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return homescreen1();
+                          return myBidhomepage();
                         }));
                       },
                       child: Container(
