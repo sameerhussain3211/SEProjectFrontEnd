@@ -1,5 +1,6 @@
 import 'package:app7/homescreen1.dart';
 import 'package:app7/screens/credentialScreens/loginScreen.dart';
+import 'package:app7/screens/userScreens/createListingScreens/createListing.dart';
 import 'package:app7/screens/userScreens/myBidsScreens/myBidHomepage.dart';
 import 'package:app7/screens/userScreens/searchScreens/search.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -88,7 +89,7 @@ class userHomeScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return myBidhomepage();
+                      return createListingScreen();
                     }));
                   },
                   child: Container(
@@ -156,9 +157,13 @@ class userHomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-             
-              Text("LOG OUT", style: TextStyle(fontWeight: FontWeight.bold),),
-               Container(height: 30,),
+              Text(
+                "LOG OUT",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Container(
+                height: 30,
+              ),
             ],
           ),
         ),

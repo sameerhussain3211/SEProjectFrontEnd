@@ -1,108 +1,190 @@
-// import 'dart:io';
-// import 'package:flutter/material.dart';
-// import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:app7/screens/userScreens/userHomeScreen.dart';
+import 'package:app7/widgets/SubmitButton.dart';
+import 'package:app7/widgets/textInput.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-// void main() => runApp(MaterialApp(
-//       home: Home(),
-//       debugShowCheckedModeBanner: false,
-//     ));
+class createListingScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _createListingScreen();
+  }
+}
 
-// class Home extends StatefulWidget {
-//   @override
-//   _HomeState createState() => _HomeState();
-// }
+class _createListingScreen extends State<createListingScreen> {
+  File? selectedImage1;
+  File? selectedImage2;
+  File? selectedImage3;
+  File? selectedImage4;
+  File? selectedImage5;
+  final ImagePicker picker = ImagePicker();
 
-// class _HomeState extends State<Home> {
+  var Name = TextEditingController();
+  var description = TextEditingController();
+  var houseAddress = TextEditingController();
+  var bedrooms = TextEditingController();
+  var bathrooms = TextEditingController();
+  var expectedPrice = TextEditingController();
 
-//   XFile? image;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(80, 208, 52, 41),
+          title: Center(child: Text("BidNest")),
+        ),
+        body: Container(
+            color: Color.fromARGB(70, 198, 222, 234),
+            child: Center(
+                child: Container(
+                    margin: EdgeInsets.only(
+                        top: 20, left: 40, right: 40, bottom: 40),
+                    width: (MediaQuery.of(context).size.width) - 50,
+                    child: SingleChildScrollView(
+                        child: Column(children: [
+                      Text(
+                        "ENTER YOUR PROPERTY DETAILS  ",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Text("NAME"),
+                      textInput(
+                        controller: Name,
+                        hintText: "ENTER YOUR NAME",
+                        borderRadius: 10,
+                        obscure: false,
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Text("DESCRIPTION "),
+                      textInput(
+                        controller: description,
+                        hintText: "ENTER DESCRIPTION",
+                        borderRadius: 10,
+                        obscure: false,
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Text("PROPERTY ADDRESS"),
+                      textInput(
+                        controller: houseAddress,
+                        hintText: "ADDRESS",
+                        borderRadius: 10,
+                        obscure: false,
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Text("NUMBER OF BEDROOMS "),
+                      textInput(
+                        controller: bedrooms,
+                        hintText: "NUMBER OF BEDROOMS",
+                        borderRadius: 10,
+                        obscure: false,
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Text("NUMBER OF BATHROOMS"),
+                      textInput(
+                        controller: bathrooms,
+                        hintText: "NUMBER OF BATHROOMS",
+                        borderRadius: 10,
+                        obscure: true,
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      _buildImageSelectionButton(1, selectedImage1),
+                      Container(
+                        height: 20,
+                      ),
+                      _buildImageSelectionButton(2, selectedImage2),
+                      Container(
+                        height: 20,
+                      ),
+                      _buildImageSelectionButton(3, selectedImage3),
+                      Container(
+                        height: 20,
+                      ),
+                      _buildImageSelectionButton(4, selectedImage4),
+                      Container(
+                        height: 20,
+                      ),
+                      _buildImageSelectionButton(5, selectedImage5),
+                      Container(
+                          margin: EdgeInsets.all(15),
+                          child: SubmitButton(
+                              buttonText: "CREATE",
+                              buttonLength: 150,
+                              onPressedCallback: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return userHomeScreen();
+                                    },
+                                  ),
+                                );
+                              }))
+                    ]))))));
+  }
 
-//   final ImagePicker picker = ImagePicker();
+  Future getImage(int buttonNumber) async {
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-//   //we can upload image from camera or from gallery based on parameter
-//   Future getImage(ImageSource media) async {
-//     var img = await picker.pickImage(source: media);
+    setState(() {
+      if (image != null) {
+        switch (buttonNumber) {
+          case 1:
+            selectedImage1 = File(image.path);
+            break;
+          case 2:
+            selectedImage2 = File(image.path);
+            break;
+          case 3:
+            selectedImage3 = File(image.path);
+            break;
+          case 4:
+            selectedImage4 = File(image.path);
+            break;
+          case 5:
+            selectedImage5 = File(image.path);
+            break;
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Nothing is selected')),
+        );
+      }
+    });
+  }
 
-//     setState(() {
-//       image = img;
-//     });
-//   }
-
-//   //show popup dialog
-//   void myAlert() {
-//     showDialog(
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             shape:
-//                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-//             title: Text('Please choose media to select'),
-//             content: Container(
-//               height: MediaQuery.of(context).size.height / 6,
-//               child: Column(
-//                 children: [
-//                   ElevatedButton(
-//                     //if user click this button, user can upload image from gallery
-//                     onPressed: () {
-//                       Navigator.pop(context);
-//                       getImage(ImageSource.gallery);
-//                     },
-//                     child: Row(
-//                       children: [
-//                         Icon(Icons.image),
-//                         Text('From Gallery'),
-//                       ],
-//                     ),
-//                   ),
-
-//                 ],
-//               ),
-//             ),
-//           );
-//         });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Upload Image'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             ElevatedButton(
-//               onPressed: () {
-//                 myAlert();
-//               },
-//               child: Text('Upload Photo'),
-//             ),
-//             SizedBox(
-//               height: 10,
-//             ),
-//             //if image not null show the image
-//             //if image null show text
-//             // image != null
-//             //     // ? Padding(
-//                 //     padding: const EdgeInsets.symmetric(horizontal: 20),
-//                 //     child: ClipRRect(
-//                 //       borderRadius: BorderRadius.circular(8),
-//                 //       // child: Image.file(
-//                 //       //   //to show image, you type like this.
-//                 //       //   File(image!.path),
-//                 //       //   fit: BoxFit.cover,
-//                 //       //   width: MediaQuery.of(context).size.width,
-//                 //       //   height: 300,
-//                 //       // ),
-//                 //     ),
-//                 //   )
-//                 // : Text(
-//                 //     "No Image",
-//                 //     style: TextStyle(fontSize: 20),
-//                 //   )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  Widget _buildImageSelectionButton(int buttonNumber, File? selectedImage) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green),
+            ),
+            child: const Text('Select Image from Gallery'),
+            onPressed: () {
+              getImage(buttonNumber);
+            },
+          ),
+          selectedImage == null
+              ? const Center(child: Text('Sorry, nothing selected!!'))
+              : Image.network(selectedImage.path),
+        ],
+      ),
+    );
+  }
+}

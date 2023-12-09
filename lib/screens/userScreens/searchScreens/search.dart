@@ -1,10 +1,7 @@
-import 'package:app7/homescreen1.dart';
 import 'package:app7/screens/userScreens/searchScreens/viewProperty.dart';
 import 'package:app7/widgets/CustomDropDown.dart';
-import 'package:app7/widgets/SubmitButton.dart';
 import 'package:app7/widgets/propertyList.dart';
 import 'package:app7/widgets/rangeSlider.dart';
-import 'package:app7/widgets/textInput.dart';
 import 'package:flutter/material.dart';
 
 class search extends StatefulWidget {
