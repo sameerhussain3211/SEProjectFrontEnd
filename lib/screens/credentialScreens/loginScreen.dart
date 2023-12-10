@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String? dropdownvalue;
   List<String> items = ['Admin', 'User'];
 
-  var userName = TextEditingController();
+  var emailAddress = TextEditingController();
   var password = TextEditingController();
 
   @override
@@ -64,11 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       height: 40,
                     ),
-                    Text("USERNAME"),
+                    Text("EMAIL ADDRESS"),
 
                     textInput(
-                        controller: userName,
-                        hintText: "ENTER USERNAME",
+                        controller: emailAddress,
+                        hintText: "ENTER EMAIL ADDRESS",
                         borderRadius: 10,
                         obscure: false),
 
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         buttonText: "LOGIN",
                         buttonLength: 150,
                         onPressedCallback: () {
-                          String b = userName.text.toString();
+                          String b = emailAddress.text.toString();
                           String c = password.text.toString();
                           String d = dropdownvalue.toString();
                           print("USERNAME $b password $c your are $d");
