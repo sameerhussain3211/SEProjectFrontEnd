@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:app7/screens/userScreens/createListingScreens/addpicture.dart';
 import 'package:app7/screens/userScreens/userHomeScreen.dart';
 import 'package:app7/widgets/SubmitButton.dart';
 import 'package:app7/widgets/textInput.dart';
@@ -101,90 +102,21 @@ class _createListingScreen extends State<createListingScreen> {
                       Container(
                         height: 20,
                       ),
-                      _buildImageSelectionButton(1, selectedImage1),
-                      Container(
-                        height: 20,
-                      ),
-                      _buildImageSelectionButton(2, selectedImage2),
-                      Container(
-                        height: 20,
-                      ),
-                      _buildImageSelectionButton(3, selectedImage3),
-                      Container(
-                        height: 20,
-                      ),
-                      _buildImageSelectionButton(4, selectedImage4),
-                      Container(
-                        height: 20,
-                      ),
-                      _buildImageSelectionButton(5, selectedImage5),
                       Container(
                           margin: EdgeInsets.all(15),
                           child: SubmitButton(
-                              buttonText: "CREATE",
+                              buttonText: "PROCEED UPLOAD IMAGE",
                               buttonLength: 150,
                               onPressedCallback: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return userHomeScreen();
+                                      return addPicture();
                                     },
                                   ),
                                 );
                               }))
                     ]))))));
-  }
-
-  Future getImage(int buttonNumber) async {
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (image != null) {
-        switch (buttonNumber) {
-          case 1:
-            selectedImage1 = File(image.path);
-            break;
-          case 2:
-            selectedImage2 = File(image.path);
-            break;
-          case 3:
-            selectedImage3 = File(image.path);
-            break;
-          case 4:
-            selectedImage4 = File(image.path);
-            break;
-          case 5:
-            selectedImage5 = File(image.path);
-            break;
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Nothing is selected')),
-        );
-      }
-    });
-  }
-
-  Widget _buildImageSelectionButton(int buttonNumber, File? selectedImage) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.green),
-            ),
-            child: const Text('Select Image from Gallery'),
-            onPressed: () {
-              getImage(buttonNumber);
-            },
-          ),
-          selectedImage == null
-              ? const Center(child: Text('Sorry, nothing selected!!'))
-              : Image.network(selectedImage.path),
-        ],
-      ),
-    );
   }
 }
