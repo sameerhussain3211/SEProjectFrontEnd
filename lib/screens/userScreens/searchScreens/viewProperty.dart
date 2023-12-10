@@ -20,7 +20,8 @@ class viewproperty extends StatelessWidget {
           As the aroma of freshly brewed coffee wafted through the air, a sense of anticipation lingered, promising a day filled with possibilities.
 
 In the heart of the town, a bustling marketplace came alive with vendors arranging their stalls, 
-displaying an array of vibrant fruits, vegetables, and artisan crafts. The laughter of children echoed as they played near a bubbling fountain, their innocent joy contagious to all who passed by. The local bakery, known for its mouthwatering pastries, emanated an irresistible scent, drawing in passersby with promises of delectable treats."""),
+displaying an array of vibrant fruits, vegetables, and artisan crafts. The laughter of children echoed as they played near a bubbling fountain, their innocent joy contagious to all who passed by. The local bakery, 
+known for its mouthwatering pastries, emanated an irresistible scent, drawing in passersby with promises of delectable treats."""),
     );
   }
 }

@@ -26,6 +26,8 @@ class _search extends State<search> {
     'PESHAWAR',
     'GILGIT',
     'QUETTA',
+    'ISLAMABAD',
+    'MULTAN',
     'OTHER'
   ];
   List<String> rooms = ['1', '2', '3', '4', '5', '6', '7'];
@@ -122,7 +124,7 @@ class _search extends State<search> {
               Row(
                 children: [
                   Text(
-                    "PRICE RANGE",
+                    "PRICE MILLIONS",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Container(

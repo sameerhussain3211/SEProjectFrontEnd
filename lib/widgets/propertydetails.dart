@@ -1,4 +1,5 @@
 import 'package:app7/widgets/SubmitButton.dart';
+import 'package:app7/widgets/textInput.dart';
 import 'package:flutter/material.dart';
 
 class propertyDetails extends StatelessWidget {
@@ -12,6 +13,7 @@ class propertyDetails extends StatelessWidget {
   double? areaInSqFeet;
   double? priceOfHouseInMillions;
   String? descriptionOfHouse;
+  var yourBidPrice = TextEditingController();
 
   propertyDetails({
     required this.image1,
@@ -30,9 +32,9 @@ class propertyDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Color.fromARGB(80, 208, 52, 41),
-          title: Center(child: Text("BidNest")),
-        ),
+        backgroundColor: Color.fromARGB(80, 208, 52, 41),
+        title: Center(child: Text("BidNest")),
+      ),
       body: SingleChildScrollView(
         child: Column(children: [
           Container(
@@ -70,19 +72,16 @@ class propertyDetails extends StatelessWidget {
           Container(
             height: 10,
           ),
-              Container(
-                color: const Color.fromARGB(118, 158, 158, 158),
-                child: Text("ADDRESS: $addressOfHouse"),
-              ),
-          
+          Container(
+            color: const Color.fromARGB(118, 158, 158, 158),
+            child: Text("ADDRESS: $addressOfHouse"),
+          ),
           Container(
             height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
-  
               Container(
                 color: const Color.fromARGB(104, 158, 158, 158),
                 child: Text("ROOMS: $roomsInHouse"),
@@ -95,29 +94,34 @@ class propertyDetails extends StatelessWidget {
                   child: Text("PRICE IN MILLIONS: $priceOfHouseInMillions")),
             ],
           ),
-             Container(
-                height: 20,
-              ),
           Container(
-                color: const Color.fromARGB(118, 158, 158, 158),
-                child: Text("AREA IN SQ FEET: $areaInSqFeet"),
-              ),
-              Container(
-                height: 20,
-              ),
-
-              Text("DESCRIPTION: "),
-               Container(
-                height: 20,
-              ),
-
-
-           Container(
+            height: 20,
+          ),
+          Container(
+            color: const Color.fromARGB(118, 158, 158, 158),
+            child: Text("AREA IN SQ FEET: $areaInSqFeet"),
+          ),
+          Container(
+            height: 20,
+          ),
+          Text("DESCRIPTION: "),
+          Container(
+            height: 20,
+          ),
+          Container(
             padding: EdgeInsets.all(20),
-              width: 400,
-              child: Text("$descriptionOfHouse"),
-            ),
-          
+            width: 400,
+            child: Text("$descriptionOfHouse"),
+          ),
+          Container(
+            height: 40,
+          ),
+          Text("ENTER YOUR PRICE: "),
+          textInput(
+              controller: yourBidPrice,
+              hintText: "ENTER YOUR BID PRICE",
+              borderRadius: 10,
+              obscure: false),
           Container(
             height: 40,
           ),

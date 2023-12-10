@@ -23,12 +23,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(70, 198, 222, 234),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(80, 208, 52, 41),
           automaticallyImplyLeading: false,
           title: Center(child: Text("BidNest")),
         ),
-        // int this lab i did list view , circling image , custom font
+      
         body: Container(
           color: Color.fromARGB(70, 198, 222, 234),
           child: SingleChildScrollView(
