@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class propertyList extends StatelessWidget {
   Image? img;
   String? AdressHouse;
-  double? areaInSqFeet;
+  String? name;
   double? price;
   int? roomNum;
 
   propertyList({
     required this.img,
     required this.AdressHouse,
-    required this.areaInSqFeet,
+    required this.name,
     required this.price,
     required this.roomNum,
   });
@@ -37,7 +37,7 @@ class propertyList extends StatelessWidget {
           children: [
             Container(
               color: const Color.fromARGB(94, 158, 158, 158),
-              child: Text("Area: $areaInSqFeet"),
+              child: Text("NAME: $name"),
             ),
             Container(
               width: 30,

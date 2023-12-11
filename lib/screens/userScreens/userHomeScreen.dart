@@ -5,10 +5,15 @@ import 'package:app7/screens/userScreens/searchScreens/search.dart';
 import 'package:app7/screens/userScreens/viewListingsScreens/viewLists.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app7/uitlities/utilities.dart';
+
 
 class userHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+  print('token in the home dcreen: $JWT');
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(80, 208, 52, 41),
@@ -147,12 +152,17 @@ class userHomeScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return LoginScreen();
-                      }));
-                    },
+                    onTap: () async {
+              // Clear shared preferences on logout
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.clear();
+
+              // Navigate back to login screen
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
+            },
                     child: FaIcon(FontAwesomeIcons.signOut),
                   ),
                 ),

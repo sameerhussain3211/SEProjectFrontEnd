@@ -26,7 +26,7 @@ class viewList extends StatelessWidget {
                   child: propertyList(
                     img: Image.asset('assects/images/sunflower.jpg'), // Corrected img parameter
                     AdressHouse: "karachi, pakistan, asia",
-                    areaInSqFeet: 1000,
+                    name: "uneelo",
                     price: 1000000,
                     roomNum: 4,
                   ),

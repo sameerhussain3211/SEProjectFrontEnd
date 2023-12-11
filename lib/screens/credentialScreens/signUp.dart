@@ -1,14 +1,56 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:app7/screens/credentialScreens/loginScreen.dart';
 import 'package:app7/widgets/textInput.dart';
-import 'package:flutter/material.dart';
 import 'package:app7/widgets/SubmitButton.dart';
 
 class signUp extends StatelessWidget {
   var email = TextEditingController();
-  var passsword = TextEditingController();
+  var password = TextEditingController();
   var fullName = TextEditingController();
-  var UserName = TextEditingController();
+  var userName = TextEditingController();
   var phoneNumber = TextEditingController();
+
+  Future<void> registerUser(BuildContext context) async {
+    String apiUrl = 'http://localhost:3000/user/register';
+
+    try {
+      var url = Uri.parse(apiUrl);
+      var response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': email.text,
+          'password': password.text,
+          'name': fullName.text,
+          'username': userName.text,
+          'contact': phoneNumber.text,
+        }),
+      );
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        // Registration successful, navigate to login screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+        );
+      } else {
+        // Handle registration failure
+        // You might want to show an error message to the user
+        print('Registration failed');
+      }
+    } catch (error) {
+      print('Error: $error');
+      // Handle error accordingly
+      // You might want to show an error message to the user
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +89,7 @@ class signUp extends StatelessWidget {
                   ),
                   Text("USER NAME"),
                   textInput(
-                    controller: UserName,
+                    controller: userName,
                     hintText: "ENTER USER NAME",
                     borderRadius: 10,
                     obscure: false,
@@ -77,7 +119,7 @@ class signUp extends StatelessWidget {
                   ),
                   Text("PASSWORD"),
                   textInput(
-                    controller: passsword,
+                    controller: password,
                     hintText: "ENTER PASSWORD",
                     borderRadius: 10,
                     obscure: true,
@@ -88,18 +130,8 @@ class signUp extends StatelessWidget {
                       buttonText: "SIGN UP",
                       buttonLength: 150,
                       onPressedCallback: () {
-                        String a = email.text.toString();
-                        String b = passsword.text.toString();
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return LoginScreen();
-                            },
-                          ),
-                        );
-                        print("Your pin $a and your new password is $b ");
+                        // Call the registerUser function to connect with the backend
+                        registerUser(context);
                       },
                     ),
                   ),
