@@ -1,8 +1,14 @@
+// ignore_for_file: duplicate_import
+
+import 'dart:convert';
 import 'package:app7/screens/userScreens/searchScreens/viewProperty.dart';
+import 'package:app7/uitlities/utilities.dart';
 import 'package:app7/widgets/CustomDropDown.dart';
 import 'package:app7/widgets/propertyList.dart';
 import 'package:app7/widgets/rangeSlider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:app7/uitlities/utilities.dart';
 
 class search extends StatefulWidget {
   @override
@@ -12,7 +18,8 @@ class search extends StatefulWidget {
 }
 
 class _search extends State<search> {
-  List<String> region = [
+  // String? authToken = '';
+   List<String> region = [
     'SINDH',
     'BOLOCHISTAN',
     'PUNJAB',
@@ -20,6 +27,7 @@ class _search extends State<search> {
     'GILGIT-BALTISTAN',
     'KASHMIR'
   ];
+
   List<String> city = [
     'KARACHI',
     'LAHORE',
@@ -28,8 +36,9 @@ class _search extends State<search> {
     'QUETTA',
     'ISLAMABAD',
     'MULTAN',
-    'OTHER'
+    'OTHERS'
   ];
+
   List<String> rooms = ['1', '2', '3', '4', '5', '6', '7'];
   List<String> areaInSqfeet = [
     '800',
@@ -42,23 +51,70 @@ class _search extends State<search> {
     '5000',
     '10000'
   ];
-  List<String> priceRange = [
-    'LESS THAN MILLION',
-    '1 MILLION TO 1 CRORE',
-    '1 TO 10 CRORE',
-    'MORE THAN 10 CRORE',
-  ];
+
   String? regionName;
   String? cityName;
   String? roomsInHouse;
   String? areaOfHouse;
-  String? priceOfHouse;
   double? lowerLimitForBid;
   double? upperLimitForBid;
 
+  Future performPropertySearch() async {
+    final String apiUrl = 'http://localhost:3000/user/search-property';
+
+// Prepare the request body
+  Map<String, dynamic> requestBody = {
+    "region": regionName,
+    "city": cityName,
+    "roomsInHouse": roomsInHouse,
+    "areaOfHouse": areaOfHouse,
+    "priceOfHouse": 1000, // Replace with an appropriate default value or handle separately
+    "lower_limit": lowerLimitForBid,
+    "upper_limit": upperLimitForBid,
+    "bedrooms": int.parse(roomsInHouse ?? "0"), // Assuming bedrooms is an integer
+  };
+
+    try {
+      final response = await http.post(
+        
+        Uri.parse(apiUrl),
+        body: jsonEncode(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': '$JWT'},
+      );
+      
+
+      if (response.statusCode == 200) {
+        // Successful response, you can handle the result here
+        print("Search successful");
+        print(response.body);
+        return response.body;
+
+        // Parse the response and update your UI accordingly
+        // For example, you might want to update the property list based on the search results
+      } else {
+        // Handle error response
+        print("Error: ${response.statusCode}");
+        print(response.body);
+        // Display an error message to the user
+        return [];
+
+      }
+    } catch (error) {
+      // Handle network or other errors
+      print("Error: $error");
+      return [];
+      // Display an error message to the user
+    }
+
+  }
+
+  bool shohSearData = false;
 
   @override
   Widget build(BuildContext context) {
+    print(" THIS IS MY TOKEN YEHHH $JWT");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(80, 208, 52, 41),
@@ -140,9 +196,12 @@ class _search extends State<search> {
                     },
                   ),
                   ElevatedButton(
-                      onPressed: () {
-                        print("SEARCH");
-                      },
+                    onPressed: ()async{
+                      await performPropertySearch();
+                      setState(() {
+                        shohSearData = true;
+                      });
+                    },
                       child: Icon(Icons.search))
                 ],
               ),
@@ -152,35 +211,82 @@ class _search extends State<search> {
             ]),
           ),
         ),
-        Expanded(
-          flex: 30,
-          child: Container(
-            color: const Color.fromARGB(50, 68, 137, 255),
-            child: ListView.builder(
-              itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.all(8),
-                  // Added comma here
-                  child: InkWell(
-                    child: propertyList(
-                      img: Image.asset(
-                          'assects/images/sunflower.jpg'), // Corrected img parameter
-                      AdressHouse: 'hello,jhjs ,232,dfsdf',
-                      areaInSqFeet: 1000,
-                      price: 100000,
-                      roomNum: 4,
+
+     shohSearData
+    ? FutureBuilder(
+        future: performPropertySearch(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            var apiData = json.decode(snapshot.data);
+            print("API Data Length: ${apiData.length}");
+
+            return Container(
+              child: Expanded(
+                child: Container(
+                  color: Color.fromARGB(49, 99, 108, 124),
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: InkWell(
+                        child: propertyList(
+                          img: Image.asset('assects/images/sunflower.jpg'),
+                          AdressHouse: apiData[index]['location'].toString(),
+                          name: apiData[index]['name'].toString(),
+                          price: double.parse(apiData[index]['starting_bid'].toString()),
+                          roomNum: int.parse(apiData[index]['bedrooms'].toString()),
+                        ),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return viewproperty();
+                          }));
+                        },
+                      ),
                     ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return viewproperty();
-                      }));
-                    },
-                  )),
-              itemCount: 20,
-              scrollDirection: Axis.vertical,
-            ),
-          ),
-        )
+                    itemCount: 1,
+                    scrollDirection: Axis.vertical,
+                  ),
+                ),
+              ),
+            );
+          }
+        },
+      )
+    : Text(''),
+
+        // Expanded(
+        //   flex: 30,
+        //   child: Container(
+        //     color: const Color.fromARGB(50, 68, 137, 255),
+        //     child: ListView.builder(
+        //       itemBuilder: (context, index) => Padding(
+        //           padding: const EdgeInsets.all(8),
+        //           // Added comma here
+        //           child: InkWell(
+        //             child: propertyList(
+        //               img: Image.asset(
+        //                   'assects/images/sunflower.jpg'), // Corrected img parameter
+        //               AdressHouse: 'hello,jhjs ,232,dfsdf',
+        //               areaInSqFeet: 1000,
+        //               price: 100000,
+        //               roomNum: 4,
+        //             ),
+        //             onTap: () {
+        //               Navigator.push(context,
+        //                   MaterialPageRoute(builder: (context) {
+        //                 return viewproperty();
+        //               }));
+        //             },
+        //           )),
+        //       itemCount: 20,
+        //       scrollDirection: Axis.vertical,
+        //     ),
+        //   ),
+        // )
       ]),
     );
   }
