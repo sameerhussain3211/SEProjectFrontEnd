@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:app7/screens/userScreens/userHomeScreen.dart';
+
 import 'package:app7/uitlities/utilities.dart';
 import 'package:app7/widgets/SubmitButton.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class addPicture extends StatefulWidget {
   final int propertyID; // Added propertyID as a parameter
 
   addPicture({required this.propertyID});
+
 
   @override
   State<StatefulWidget> createState() {
@@ -25,6 +27,7 @@ class _addpicture extends State<addPicture> {
   File? selectedImage4;
   File? selectedImage5;
   final ImagePicker picker = ImagePicker();
+
 
    Future<void> uploadPictures() async {
   final apiUrl = "http://localhost:3000/user/upload-pictures";

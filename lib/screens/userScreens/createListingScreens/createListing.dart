@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app7/uitlities/utilities.dart';
+
+
+import 'package:app7/screens/userScreens/createListingScreens/addpicture.dart';
+import 'package:app7/screens/userScreens/userHomeScreen.dart';
 import 'package:app7/widgets/SubmitButton.dart';
 import 'package:app7/widgets/textInput.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +76,7 @@ Future<void> createListing() async {
             return addPicture(propertyID: propertyID);
           },
         ),
+
       );
     } else {
       // Handle other response statuses as needed
